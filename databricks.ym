@@ -1,0 +1,12 @@
+bundle:
+  name: databricks_sales_capstone
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-2827f7fb-f40c.cloud.databricks.com
