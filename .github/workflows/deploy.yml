@@ -14,10 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check repository files
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2 -type f | sort
+
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
       - name: Validate Bundle
+        working-directory: .
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
@@ -26,6 +33,7 @@ jobs:
           databricks bundle validate --target dev
 
       - name: Deploy Bundle
+        working-directory: .
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
@@ -34,6 +42,7 @@ jobs:
           databricks bundle deploy --target dev
 
       - name: Run Databricks Job
+        working-directory: .
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
