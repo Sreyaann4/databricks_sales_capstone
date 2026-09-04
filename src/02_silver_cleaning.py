@@ -132,6 +132,6 @@ df_silver_check = spark.table(silver_table)
 
 print("Silver records:", df_silver_check.count())
 
-df_silver_check.printSchema()
+#df_silver_check.printSchema()
 
 display(df_silver_check)
