@@ -5,23 +5,23 @@ resources:
 
       tasks:
         - task_key: bronze_ingestion
-          notebook_task:
-            notebook_path: ../src/01_bronze_ingestion.py
+          spark_python_task:
+            python_file: ../src/01_bronze_ingestion.py
 
         - task_key: data_quality_report
           depends_on:
             - task_key: bronze_ingestion
-          notebook_task:
-            notebook_path: ../src/00_data_quality_report.py
+          spark_python_task:
+            python_file: ../src/00_data_quality_report.py
 
         - task_key: silver_cleaning
           depends_on:
             - task_key: data_quality_report
-          notebook_task:
-            notebook_path: ../src/02_silver_cleaning.py
+          spark_python_task:
+            python_file: ../src/02_silver_cleaning.py
 
         - task_key: gold_analytics
           depends_on:
             - task_key: silver_cleaning
-          notebook_task:
-            notebook_path: ../src/03_gold_analytics.py
+          spark_python_task:
+            python_file: ../src/03_gold_analytics.py
